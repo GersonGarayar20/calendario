@@ -22,11 +22,18 @@ export default function Days({params}) {
       <div className='p-2 bg-neutral-100'>
         <h2 className='p-2'>{arrDays[hoy?.weekday]} {hoy?.day} de {arrMonths[hoy?.month]} de {hoy?.year}</h2>
       </div>
-      <ul>
+      <ul className='p-2 grid gap-2'>
         {
           hoy && notas.map(nota=>{
             if (nota.day === hoy.day && nota.month === hoy.month && nota.year === hoy.year) {
-              return (<li>{nota.content}</li>)
+              return (
+                <details style={{backgroundColor: `${nota.color}`}} className='p-2 rounded-xl'>
+                  <summary className='text-neutral-800 font-semibold'>{nota.title}</summary>
+                  <div>
+                    <p className='text-sm'>{nota.content}</p>
+                  </div>
+                </details>
+              )
             }
           })
         }

@@ -8,7 +8,6 @@ const initialState = {
   content: ""
 }
 
-
 export default function NuevaNota() {
   const [nota, setNota] = useState(initialState)
   const addNota = useNotasStore(state=>state.addNota)
@@ -23,15 +22,13 @@ export default function NuevaNota() {
       year: getDate().year,
       title: nota.title,
       content: nota.content,
-      color: 0
+      color: nota.color
     }
     console.log(nota)
-    //console.log(obj)
-    //addNota(obj)
+    console.log(obj)
+    addNota(obj)
 
     setNota(initialState)
-
-
   }
 
   const handleChange = (e) => {
@@ -48,15 +45,24 @@ export default function NuevaNota() {
     <form className='grid p-4 gap-2' onSubmit={handleSubmit}>
       <input className='p-2' name='title' value={nota.title} type="text" onChange={handleChange} placeholder="title" required/>
       <input className='p-2' name='content' value={nota.content} type="text" onChange={handleChange} placeholder="content" required/>
-      <div className='bg-slate-200 p-2'>
-        <label className='bg-red-500 w-4 h-4'>
-          <input onChange={handleChange} value="red" type="radio" name="color" id="" />
-        </label>
-        <label className='bg-blue-500 w-4 h-4'>
-          <input onChange={handleChange} value="blue" type="radio" name="color" id="" />
-        </label>
+      <h2>Select a color:</h2>
+      <div className=' p-2 flex gap-2'>
+        <RadioColor color="#FECACA" change={handleChange}/>
+        <RadioColor color="#FED7AA" change={handleChange}/>
+        <RadioColor color="#D9F99D" change={handleChange}/>
+        <RadioColor color="#BAE6FD" change={handleChange}/>
+        <RadioColor color="#DDD6FE" change={handleChange}/>
       </div>
       <button className='bg-neutral-200 p-2 rounded-full'>Crear</button>
     </form>
+  )
+}
+
+function RadioColor({color, change}) {
+  return(
+    <label style={{backgroundColor: color}} className="w-8 h-8 rounded-xl cursor-pointer">
+      <input className='peer hidden' onChange={change} value={color} type="radio" name="color" id="" />
+      <div className='invisible peer-checked:visible border-2 rounded-xl border-neutral-500 h-full'></div>
+    </label>
   )
 }

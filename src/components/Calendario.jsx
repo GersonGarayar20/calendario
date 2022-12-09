@@ -19,12 +19,11 @@ export default function Calendario({calendar, data}) {
                 return d
               }
             })
-
         
             return (
               <Link key={el.day} href={`/days/${el.day}/${el.month}/${el.year}`}>
-                <li style={el.day?{gridColumnStart: el.weekday+1}:{}}
-                className={`${da?.day?"bg-orange-300":""} p-2 hover:bg-sky-200`}>{el.day}</li>
+                <li style={el.day?{gridColumnStart: el.weekday+1, backgroundColor: da?.color || ""}:{}}
+                className="rounded-xl p-2 hover:bg-sky-100">{el.day}</li>
               </Link>
             )
 
